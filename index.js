@@ -26,5 +26,4 @@ firebase.initializeApp(firebaseConfig);
 routes(app);
 
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => console.log(`app listening in http://localhost:${port}`))

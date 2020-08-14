@@ -16,8 +16,8 @@ Router.post('/signup', (req, res) => {
     }
     const controllerResponse = new authController(data);
     controllerResponse.createUserInFirebase()
-        .then(data => response.success(req, res, `user registered successfully with id: ${data.user.uid}`, 201))
-        .catch(error => response.error(req, res, error.messge, 500))
+        .then(data => response.success(req, res, `user registered successfully with id: ${data}`, 201))
+        .catch(error => response.error(req, res, error.message, 500))
 })
 
 module.exports = Router;

@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const db = require('./auth/mongo');
 const routes = require('./network/routes');
 const firebase = require("firebase/app");
 require("firebase/auth");
@@ -16,6 +17,8 @@ const firebaseConfig = {
     appId: process.env.appId,
     measurementId: process.env.measurementId
 }
+
+db(process.env.MONGO_URI); // mongo connection
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

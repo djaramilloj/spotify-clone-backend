@@ -25,4 +25,4 @@ app.use(bodyParser.urlencoded({extended: false}));
 firebase.initializeApp(firebaseConfig);
 routes(app);
 
-app.listen(process.env.API_PORT, () => console.log(`app listening in http://localhost:${process.env.API_PORT}`))
+app.listen(process.env.PORT || 5000, () => console.log(`app listening in http://localhost:${process.env.PORT}`))

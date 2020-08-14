@@ -18,6 +18,7 @@ const firebaseConfig = {
     measurementId: process.env.measurementId
 }
 
+console.log(process.env.MONGO_URI);
 db(process.env.MONGO_URI); // mongo connection
 
 app.use(bodyParser.json());

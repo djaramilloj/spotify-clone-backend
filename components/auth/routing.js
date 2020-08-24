@@ -4,10 +4,6 @@ const response = require('../../network/response');
 const authController = require('./controller');
 const controllerResponse = new authController();
 
-Router.get('/', (req, res) => {
-    res.send('I am working')
-})
-
 Router.post('/signup', (req, res) => {
     const data = {
         name: req.body.name,
@@ -16,8 +12,11 @@ Router.post('/signup', (req, res) => {
         password: req.body.password,
     }
     controllerResponse.createUserInFirebase(data)
-        .then(data => response.success(req, res, `user registered successfully with id: ${data}`, 201))
-        .catch(error => response.error(req, res, error.message, 500))
+    .then(data =>{
+        req.session.userId = data;
+        response.success(req, res, `user successfully registered and logged in, with ${req.session.userId}`, 201)
+    })
+    .catch(error => response.error(req, res, error.message, 500))
 })
 
 

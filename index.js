@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+var session = require('express-session');
+const connectMongo = require('connect-mongo')(session);
 const db = require('./auth/mongo');
 const routes = require('./network/routes');
 const firebase = require("firebase/app");
@@ -20,6 +22,16 @@ const firebaseConfig = {
 
 db(process.env.MONGO_URI); // mongo connection
 
+app.use(session({
+    secret: 'aleatorio',
+    resave: true,
+    saveUninitialized: true,
+    store: new connectMongo({
+        url: process.env.MONGO_URI,
+        autoReconnect: true
+    }),
+    maxAge: Date.now() + (30 * 86400 * 1000)
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 firebase.initializeApp(firebaseConfig);

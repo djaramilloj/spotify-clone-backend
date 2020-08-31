@@ -23,6 +23,10 @@ const mySchema = new Schema({
         type: String,
         required: true
     },
+    count: {
+        type: Number,
+        required: false
+    }
 })
 
 

@@ -42,6 +42,21 @@ class UserAuthentication  {
             }
         }
     }
+
+    async getUser(data) {
+        if (!data.userId) {
+            throw new Error('Incomplete information');
+        } else {
+            try {          
+                // return user data with Id
+                const userId = data.userId
+                const userRetreived = await store.getUser(userId);
+                return userRetreived;
+            } catch(error) {
+                throw new Error(`There was an error getting user Info: ${error}`);
+            }
+        }
+    }
 }
 
 module.exports = UserAuthentication;

@@ -26,7 +26,22 @@ Router.post('/login', (req, res) => {
         password: req.body.password,
     }
     controllerResponse.login(data)
-        .then(data => response.success(req, res, data, 200))
+        .then(data => {
+            req.session.userId = data;
+            response.success(req, res, data, 200)
+        })
+        .catch(error => response.error(req, res, error.message, 500))
+})
+
+Router.get('/current-user', (req, res) => {
+    const data = {
+        userId: req.session.userId,
+    }
+    controllerResponse.getUser(data)
+        .then(data => {
+            req.session.userId = data;
+            response.success(req, res, data, 200)
+        })
         .catch(error => response.error(req, res, error.message, 500))
 })
 

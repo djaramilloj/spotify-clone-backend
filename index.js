@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 var session = require('express-session');
+const cors = require('cors');
 const connectMongo = require('connect-mongo')(session);
 const db = require('./auth/mongo');
 const routes = require('./network/routes');
@@ -22,6 +23,7 @@ const firebaseConfig = {
 
 db(process.env.MONGO_URI); // mongo connection
 
+app.use(cors());
 app.use(session({
     secret: 'aleatorio',
     resave: true,

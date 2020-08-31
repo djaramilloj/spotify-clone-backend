@@ -40,6 +40,7 @@ const songs = [];
 // }
 
 
+
 fs.createReadStream(__dirname + '/songs_data.csv')
   .pipe(csv())
   .on('data', (row) => {
@@ -48,8 +49,6 @@ fs.createReadStream(__dirname + '/songs_data.csv')
   .on('end', async () => {
     console.log('CSV file successfully processed');
     const genres = await store.getGenres();
-    
-    //const genresFiltered = genres.map(g => g.genre);
     const songsFiltered = songs.map(s => {
       let rta;
       for (let g of genres) {

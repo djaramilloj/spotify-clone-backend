@@ -36,7 +36,7 @@ class UserAuthentication  {
                 // return user data matching firebase Id from mongo
                 const userId = userLogged.user.uid;
                 const userRetreived = await store.getUser(userId);
-                return userRetreived;
+                return userId;
             } catch(error) {
                 throw new Error(`There was an error getting user Info: ${error}`);
             }

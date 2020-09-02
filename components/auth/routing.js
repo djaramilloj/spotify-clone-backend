@@ -14,7 +14,11 @@ Router.post('/signup', (req, res) => {
     controllerResponse.createUserInFirebase(data)
     .then(data =>{
         req.session.userId = data;
-        response.success(req, res, `user successfully registered and logged in, with ${req.session.userId}`, 201)
+        const dataRta = {
+            userId: req.session.userId
+        }
+        res.send(JSON.stringify(dataRta))
+        // response.success(req, res, `${req.session.userId}`, 201)
     })
     .catch(error => response.error(req, res, error.message, 500))
 })
@@ -28,14 +32,18 @@ Router.post('/login', (req, res) => {
     controllerResponse.login(data)
         .then(data => {
             req.session.userId = data;
-            response.success(req, res, data, 200)
+            const dataRta = {
+                userId: req.session.userId
+            }
+            res.send(JSON.stringify(dataRta))
+            // response.success(req, res, data, 200)
         })
         .catch(error => response.error(req, res, error.message, 500))
 })
 
 Router.get('/current-user', (req, res) => {
     const data = {
-        userId: req.session.userId,
+        userId: req.body.userId,
     }
     controllerResponse.getUser(data)
         .then(data => {

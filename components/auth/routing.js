@@ -14,6 +14,7 @@ Router.post('/signup', (req, res) => {
     controllerResponse.createUserInFirebase(data)
     .then(data =>{
         req.session.userId = data;
+        req.session.save();
         response.success(req, res, `user successfully registered and logged in, with ${req.session.userId}`, 201)
     })
     .catch(error => response.error(req, res, error.message, 500))
@@ -28,6 +29,7 @@ Router.post('/login', (req, res) => {
     controllerResponse.login(data)
         .then(data => {
             req.session.userId = data;
+            req.session.save();
             response.success(req, res, data, 200)
         })
         .catch(error => response.error(req, res, error.message, 500))

@@ -26,7 +26,7 @@ db(process.env.MONGO_URI); // mongo connection
 app.use(cors());
 app.use(session({
     secret: 'aleatorio',
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     store: new connectMongo({
         url: process.env.MONGO_URI,

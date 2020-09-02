@@ -37,7 +37,7 @@ Router.post('/login', (req, res) => {
 
 Router.get('/current-user', (req, res) => {
     const data = {
-        userId: req.body.userId,
+        userId: req.session.userId,
     }
     controllerResponse.getUser(data)
         .then(data => {

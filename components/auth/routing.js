@@ -38,9 +38,9 @@ Router.post('/login', (req, res) => {
         .catch(error => response.error(req, res, error.message, 500))
 })
 
-Router.get('/current-user', (req, res) => {
+Router.get('/current-user/:userId', (req, res) => {
     const data = {
-        userId: req.body.userId,
+        userId: req.params.userId,
     }
     controllerResponse.getUser(data)
         .then(data => {

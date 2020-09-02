@@ -32,6 +32,7 @@ app.use(session({
         url: process.env.MONGO_URI,
         autoReconnect: true
     }),
+    cookie: { secure: false },
     maxAge: Date.now() + (30 * 86400 * 1000)
 }));
 app.use(bodyParser.json());

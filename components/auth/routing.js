@@ -30,7 +30,10 @@ Router.post('/login', (req, res) => {
         .then(data => {
             req.session.userId = data;
             req.session.save();
-            response.success(req, res, data, 200)
+            const dataRta = {
+                userId: data
+            }
+            response.success(req, res, dataRta, 200)
         })
         .catch(error => response.error(req, res, error.message, 500))
 })

@@ -41,7 +41,7 @@ Router.get('/current-user', (req, res) => {
     }
     controllerResponse.getUser(data)
         .then(data => {
-            req.session.userId = data;
+            // req.session.userId = data;
             response.success(req, res, data, 200)
         })
         .catch(error => response.error(req, res, error.message, 500))

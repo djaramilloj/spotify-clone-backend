@@ -9,7 +9,7 @@ Router.post('/create', (req, res) => {
     // create playlist
     const data = {
         alias: req.body.alias,
-        userId: req.session.userId,
+        userId: req.body.userId,
         _id: new mongoose.Types.ObjectId().toString()
     }
     Playlist.createPlaylist(data)
@@ -28,10 +28,10 @@ Router.post('/:playlistId/add-song/', (req, res) => {
         .catch(error => response.error(req, res, error, 500))
 })
 
-Router.get('/', (req, res) => {
+Router.get('/:userId', (req, res) => {
     // add songs to specific playlists
     const data = {
-        userId: req.session.userId
+        userId: req.params.userId
     }
     Playlist.getPlaylists(data)
         .then(data => response.success(req, res, data, 201))

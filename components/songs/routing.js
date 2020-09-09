@@ -5,9 +5,9 @@ const songController = require('./controller');
 const Song = new songController();
 
 
-Router.get('/', (req, res) => {
+Router.get('/:songName', (req, res) => {
     const data = {
-        song: req.body.song
+        song: req.params.song
     }
     Song.getSongs(data)
         .then(data => {
@@ -19,7 +19,7 @@ Router.get('/', (req, res) => {
 Router.post('/:songId', (req, res) => {
     // listen to a song
     const data = {
-        userId: req.session.userId,
+        userId: req.body.userId,
         songId: req.params.songId,
     }
     Song.setRecordOfPlaySong(data)
@@ -29,10 +29,10 @@ Router.post('/:songId', (req, res) => {
         .catch(error => response.error(req, res, error, 500)) 
 })
 
-Router.get('/records', (req, res) => {
+Router.get('/:userId/records', (req, res) => {
     // get the records of songs listened by any user
     const data = {
-        userId: req.session.userId,
+        userId: req.params.userId,
     }
     Song.getSongsListenedByUser(data)
         .then(data => {

@@ -17,11 +17,11 @@ Router.post('/create', (req, res) => {
         .catch(error => response.error(req, res, error, 500))
 })
 
-Router.post('/:playlistId/add-song/:songId', (req, res) => {
+Router.post('/:playlistId/add-song/', (req, res) => {
     // add songs to specific playlists
     const data = {
         playlistId: req.params.playlistId,
-        songId: req.params.songId
+        songId: req.body.songId
     }
     Playlist.addSong(data)
         .then(data => response.success(req, res, data, 201))

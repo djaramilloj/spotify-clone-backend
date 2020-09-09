@@ -22,7 +22,6 @@ class UserAuthentication  {
             } catch(error) {
                 throw new Error(`There was an error creating new user: ${error}`);
             }
-            
         }
     }
 

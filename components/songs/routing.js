@@ -5,6 +5,15 @@ const songController = require('./controller');
 const Song = new songController();
 
 
+Router.get('/', (req, res) => {
+    const data = {};
+    Song.getSongs(data)
+        .then(data => {
+            response.success(req, res, data, 200)
+        }) 
+        .catch(error => response.error(req, res, error, 500)) 
+})
+
 Router.get('/:songName', (req, res) => {
     const data = {
         song: req.params.song
